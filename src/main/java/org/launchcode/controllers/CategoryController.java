@@ -18,7 +18,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("category")
+@RequestMapping("category")  //url mapping preference. this class begins at localhost/category
 
 public class CategoryController {
 
@@ -26,7 +26,7 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET) //value="" means url path will be localhost/category
     public String index(Model model, @RequestParam(defaultValue = "0") int id) {
         model.addAttribute("title", "Categories");
         model.addAttribute("categories", categoryDao.findAll());
@@ -52,9 +52,5 @@ public class CategoryController {
         categoryDao.save(category);
         return "redirect:";
     }
-
-
-
-
 
 }

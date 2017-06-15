@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${menu.getName()}">Default Title</h1>  <!-- coming from  viewMenu model.addAttribute("title", menu.getName()); -->
+
+<p>Cheeses with images.</p>
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+
+
+    </tr>
+
+    <tr th:each="image : ${numofimages}" > <!--th:each="image : ${imagefiles}" -->
+        <!-- <td th:text="${image.filename}"></td>
+         <td th:text="${image.id}"></td> -->
+        <td>
+            <p th:text="${image.getFilename()}"></p>
+            <p th:text="'image (primary) id is: '+${image.getId()}"></p>
+            <!--<p th:text="'image content is: '+${image.getImagecontent()}"></p>-->
+            <p th:text="'menu id is: '+${image.menu.getId()}"></p>
+            <img th:src="@{/Imagedlfile/image.getId}"  width="400" height="250" />
+<!--<img th:src="@{/Imagedlfile/${image.menu.getId()}/${image.getId()}}"  width="350" height="150" />-->
+        </td>
+    </tr>
+
+
+
+</table>
+
+
+</body>
+</html>

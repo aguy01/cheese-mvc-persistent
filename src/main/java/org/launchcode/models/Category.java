@@ -23,8 +23,9 @@ public class Category {
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "category_id")
-    private List<Cheese> cheeses = new ArrayList<>();
+    @JoinColumn(name = "category_id")/*foreign key(a child) in cheese table. which corresponds to the primary key
+    in the Category table. */
+    private List<Cheese> cheeses = new ArrayList<>(); /****/
 
 
     public Category() {}

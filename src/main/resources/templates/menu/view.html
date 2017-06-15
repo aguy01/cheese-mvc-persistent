@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:form="http://www.w3.org/1999/xhtml">
+
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${title}">Default Title</h1>  <!-- coming from  viewMenu model.addAttribute("title", menu.getName());
+  -->
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul>
-    <li th:each="cheese : ${cheeses}" th:text="${cheese.name}"></li>
+    <li th:each="cheese : ${cheeses}" th:text="${cheese.name}"></li> <!-- coming from  viewMenu   -->
 </ul>
 
 <p th:unless="${cheeses.size()}"><i>No cheeses yet</i></p>
 
 <p> <a th:href="'/menu/add-item/' + ${menuId}"> Add Cheese</a></p>
+<p> <a th:href="'/Imagefile/menu?id=' + ${menuId}"> Add Images</a></p>
 
 
+<!--
+<form method="post" enctype="multipart/form-data">  add this later -> "multiple="multiple" will require
+the controller code to loop that many times to add each image into the sql db
+    <p>Limited to 1 photo only.</p>
+
+<input type="file" name="uploadFile" id="file" accept="image/*"/>
+    <p></p>
+    <input type="submit" value="add photo" />
+
+    <p th:text="${imagefile}"></p>
+
+
+
+</form> -->
 </body>
 </html>

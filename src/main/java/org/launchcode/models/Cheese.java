@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO ;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by LaunchCode
@@ -23,7 +25,7 @@ public class Cheese {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    @ManyToOne
+    @ManyToOne/*many cheeses can be from 1 category only*/
     private Category category;
 
     @ManyToMany(mappedBy =  "cheeses")
@@ -64,5 +66,6 @@ public class Cheese {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
+    }/*this will set the category for each
+    cheese object created, and the category is associated to each cheese*/
 }

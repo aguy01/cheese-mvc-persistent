@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}">Default Title</h1>  <!-- coming from  viewMenu model.addAttribute("title", menu.getName()); -->
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+
+
+    </tr>
+
+    <tr > <!--th:each="image : ${imagefiles}" -->
+        <!-- <td th:text="${image.filename}"></td>
+         <td th:text="${image.id}"></td> -->
+        <td>
+            <img th:src="@{/tempdir/International Cheese Sampler3.jpg}"    /> <!-- th:src="@{/image/${image_id}}"  width="350" height="150"   <img
+ th:attr="src=${item.imgUrl},title=${item.imgUrl},alt=${item.imgUrl}"
+            height="538" width="300"/><br/>
+-->
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

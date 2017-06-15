@@ -6,7 +6,12 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px;" th:object="${cheese}">
+    <form method="post" style="max-width:600px;" th:object="${cheese}"><!--upper case Cheese wont work here. why? -->
+        <!-- basically, `model.addAttribute("cheese",new Cheese());` is same as `model.addAttribute(new Cheese());`
+        Thymeleaf would automatically create `cheese` variable to link/reference to the object `Cheese`.
+        Now it makes sense. `model.addAttribute("key", "value");` is something like key-value relation. if key is omitted
+        then thymeleaf will create an automatic key to work with the value. in this case value is object. Thanks to
+        Jeannie for the guidance-->
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
@@ -23,7 +28,7 @@
         <select name="categoryId">
             <option th:each="category : ${categories}"
                     th:text="${category.name}"
-                    th:value="${category.id}"></option>
+                    th:value="${category.id}"></option><!-- this id is added into the html page so that when selected the id value can be retrieved and processed accordingly-->
         </select>
     </div>
 
