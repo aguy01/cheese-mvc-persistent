@@ -66,66 +66,6 @@ public class ImagedlController {
     private MenuDao menuDao;
 
 
-    @RequestMapping(value = "{imageid}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    @ResponseBody
-    public byte[] postmedia(@PathVariable String imageid ) {//List <byte[]>
-
-        /*Menu menu = menuDao.findOne(menuid);
-        List<Imagefile> imagefiles = menu.getImagefiles();*/
-        //int idint1 = Integer.parseInt(imageid);
-        System.out.println("imageid passed in:" + imageid);
-
-        try {
-            int idint = Integer.parseInt(imageid);
-            System.out.println("idint is %d:" + idint);
-
-
-        } catch (NumberFormatException e) {
-            //Will Throw exception!
-            //do something! anything to handle the exception.
-        }
-
-
-        //Integer.parseInt(imageone.getFilename()); //Integer.parseInt(image.getId()
-        //byte[] menuimage =  imageone.getImagecontent();
-
-
-        //byte[] newbyte = imagefileDao.findOne(menuid).getImagecontent();
-        /**final HttpHeaders headers = new HttpHeaders();
-         headers.setContentType(MediaType.IMAGE_PNG);
-         return new ResponseEntity<byte[]>(newbyte, headers, HttpStatus.OK);**/
-        //String strimage= newbyte.toString();
-
-        // imagefiles.stream();
-
-
-        /*menu.getImagefiles().get(0);
-        List<byte[]> imageBytes = new ArrayList<byte[]>();
-        imageBytes.add(menu.getImagefiles().get(0).getImagecontent());
-        imageBytes.add(menu.getImagefiles().get(1).getImagecontent());*/
-        //byte[] menuimage = new byte[]<>;
-        //byte[] menuimage =  menu.getImagefiles().get(image-1).getImagecontent();
-
-        //model.addAttribute("imagefiles", imageBytes.get(0)); //menu.getImagefiles() ; menu.getImagefiles()
-        /*System.out.println("Size of the List<Imagefile> imagefiles:" + imagefiles.size());
-        System.out.println("The filename in the dB for the menuid 1:" + menu.getImagefiles().get(0).getFilename());
-        System.out.println("Size of the image in bytes at 0 index:" + imageBytes.get(0).length+ "bytes");
-
-    /*for (int i=0; i < menu.getImagefiles().size();i++) {
-
-
-    }*/
-        Imagefile imageone= imagefileDao.findOne(1);
-        byte[] menuimage =  imageone.getImagecontent();
-        return menuimage;
-
-
-
-    }
-
-
-
-}
 
 
 

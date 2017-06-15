@@ -35,7 +35,7 @@ public class CheeseController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("cheeses", cheeseDao.findAll()); //cheeseDao contains category info as well due to the foreign key of category..
         model.addAttribute("title", "My Cheeses");
 
         return "cheese/index";
