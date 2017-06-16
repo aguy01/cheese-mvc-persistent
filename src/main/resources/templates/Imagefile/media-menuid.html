@@ -15,24 +15,6 @@
         <th>Name</th>
 
 
-    </tr>
-
-    <tr th:each="image : ${numofimages}" > <!--th:each="image : ${imagefiles}" -->
-        <!-- <td th:text="${image.filename}"></td>
-         <td th:text="${image.id}"></td> -->
-        <td>
-            <p th:text="${image.getFilename()}"></p>
-            <p th:text="'image (primary) id is: '+${image.getId()}"></p>
-            <!--<p th:text="'image content is: '+${image.getImagecontent()}"></p>-->
-            <p th:text="'menu id is: '+${image.menu.getId()}"></p>
-            <img th:src="@{/Imagedlfile/${image.id}}"  width="400" height="250" />
-<!--<img th:src="@{/Imagedlfile/${image.menu.getId()}/${image.getId()}}"  width="350" height="150" />-->
-        </td>
-    </tr>
-
-
-
-</table>
 
 
 </body>

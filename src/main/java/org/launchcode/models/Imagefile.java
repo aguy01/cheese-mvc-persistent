@@ -10,19 +10,3 @@ import java.sql.*;
 /**
  * Created by shaikh on 5/4/2017.
  */
-
-@Entity //this class or object will be stored in the mysql db with that annotation.
-/* this annotation will tell the spring boot to work with the Java API to store this object in the relational db
-* with the fileds below as columns for this class, unless the fields are exempt to appear in the relational db.**/
-public class Imagefile {
-
-    @Id
-    @GeneratedValue
-    private int id;
-
-    private String filename;
-
-    @Lob
-    private byte[] imagecontent;
-
-

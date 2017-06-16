@@ -103,3 +103,153 @@ public class ImagefileController {
     }
     //once in the /imagefile page then add the upload button
 
+
+
+    @RequestMapping(value = "menu", method = RequestMethod.POST)
+    public String imageupload(Model model, @ModelAttribute Imagefile newimgfile,@RequestParam("id") int id,
+                              @RequestParam("uploadFile") MultipartFile uploadFile,
+                              RedirectAttributes redirectAttributes, MultipartHttpServletRequest request) {
+
+
+        /**FileChooser fileChooser = new FileChooser();
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");**/
+        ;
+
+
+        if (uploadFile.isEmpty()) {
+            Menu menu = menuDao.findOne(id);
+            model.addAttribute("title", "Add images to the menu: " + menu.getName());
+            //redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            model.addAttribute("message", "Please select a file to upload. Use @valid statement here instead.");
+            System.out.println("No file selected. Please select a file to upload. Use @valid statement here instead.");
+            return "Imagefile/index";
+        }
+        String tempFileName = "/tempdir" + uploadFile.getOriginalFilename();
+
+        //http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/multipart/MultipartFile.html
+        /**org.springframework.web.multipart.MultipartFile is an interface so firstly you are going to need to work
+         * with an implementation of this interface.
+         The only implementation that I can see for that interface that you can use out-of-the-box is org.springframework.
+         web.multipart.commons.CommonsMultipartFile. The API for that implementation can be found here
+         http://static.springsource.org/spring/docs/3.0.x/api/org/springframework/web/multipart/commons/CommonsMultipartFile.html
+
+         Alternatively as org.springframework.web.multipart.MultipartFile is an interface, you could provide your own
+         implementation and simply wrap your byte array. As a trivial example:**/
+        /**Menu menu = menuDao.findOne(menuId);
+         model.addAttribute("title", menu.getName());
+         model.addAttribute("cheeses", menu.getCheeses());
+         model.addAttribute("menuId", menu.getId());**/
+        //uploadFile.getBytes();
+        //add photo upload coding here.
+
+        //String uploadFilepath=Paths.get("." + File.separator, filename).toString();;
+
+        //need to get the file into the input stream.
+
+        //byte[] bytes = uploadFile.getBytes();
+        //String filename1 = uploadFile.toString();
+        //File f = new File(filename1);
+        //f.getAbsolutePath();
+        //FileInputStream fis = new FileInputStream(f.getAbsoluteFile());
+        //f.getAbsolutePath();
+        //Byte [] imagefile;
+        //ByteArrayInputStream fileintoarray  = new ByteArrayInputStream(filename.getBytes());
+
+        //InputStream is = new FileInputStream(new File(filename1));
+        //File filename = new FileInputStream(filename1.getBytes());
+        //String uploadFilename = uploadFile.getOriginalFilename();
+        //createSessionFactory().openSession();
+
+        //getSessionFactory().getCurrentSession();openSession()
+        //File uploadfile = new File(filename);
+
+        //Blob fileblob = Hibernate.getLobCreator(session).createBlob(filename.getBytes()); //new FileInputStream(uploadfile), file1.length()
+
+        // File convFile = new File(uploadFile.getOriginalFilename());
+        File file = new File(uploadFile.getOriginalFilename());//changing the multipart file into objet File
+        //getProperty("upload.file.path");
+        try {
+            uploadFile.getBytes();
+            uploadFile.getInputStream();
+
+            String filename = uploadFile.getOriginalFilename();
+            /**String directory = env.getProperty("file.path");
+             String uploadFilePath = Paths.get("." + File.separator + directory, filename).toString();
+             initSession();
+             Session session = sessionFactory.getSessionFactory().getCurrentSession();
+             Blob imageblob = Hibernate.getLobCreator(session).createBlob(new FileInputStream(file), file.length());**/
+            // /file is the object with in try/catch block
+            //endSession();
+            byte[] imagefiledata = new byte[(int) file.length()];
+            imagefiledata=uploadFile.getBytes();
+            //byte[] imagefiledatainbytes  = uploadFile.getBytes();
+            /**File file1 = new File(uploadFilePath);
+             InputStream fin = new FileInputStream(file1);
+             final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(uploadFilePath)));
+             stream.write(uploadFile.getBytes());
+             stream.close();**/
+            //FileInputStream fileInputStream = new FileInputStream(file1);
+            //fileInputStream.read(imagefiledata);
+            //fileInputStream.close();
+
+            //FileInputStream fileInputStream = new FileInputStream(file);
+            //fileInputStream.read(imagefiledata);
+            //fileInputStream.close();
+
+            /**fin.read(imagefiledata);
+             fin.close();**/
+
+            newimgfile.setMenu(menuDao.findOne(id));
+            newimgfile.setImagecontent(imagefiledata);
+            newimgfile.setFilename(uploadFile.getOriginalFilename());
+            imagefileDao.save(newimgfile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(uploadFilePath)));
+
+
+        //File convFile = new File( uploadFile.getOriginalFilename());
+        //File savedFile = new File("/tempdir" + uploadFile);
+
+        //String directory = "C:/Users/smahmoo8/IdeaProjects/cheese-mvc-persistent/tempdir";
+        //String uploadFilePath = Paths.get("." + File.separator +directory, filename).toString();
+        //uploadFile.transferTo();
+        //byte [] byteArr=uploadFile.getBytes();
+        // FileInputStream fileInputStream = new FileInputStream(file);
+        Menu menu = menuDao.findOne(id);
+
+        /***/model.addAttribute("title", "Add images to the menu: " + menu.getName());
+        System.out.println("Original Filename is:" + file);
+
+        System.out.println("File Class is:" + uploadFile.getClass());
+        System.out.println("Is the File Empty?:" + uploadFile.isEmpty());
+        System.out.println("File size:" + uploadFile.getSize() + ". Match this size to the image properties size in Windows");
+        System.out.println("File contentType:" + uploadFile.getContentType());/****/
+
+
+        //session.close();
+        return "Imagefile/index";
+    }
+
+    /**
+     private static void initSession() {
+     Configuration configuration = new Configuration().configure();
+     serviceRegistry = new StandardServiceRegistryBuilder()
+     .applySettings(configuration.getProperties()).build();
+
+     SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+     session = sessionFactory.openSession();
+     session.beginTransaction();
+     }
+
+     private static void endSession() {
+     session.getTransaction().commit();
+     session.close();
+
+     StandardServiceRegistryBuilder.destroy(serviceRegistry);
+     } **/
+
+
